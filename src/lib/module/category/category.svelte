@@ -4,26 +4,23 @@
     import Filter from "$lib/module/category/forms/filtered.svelte";
     import Add from "$lib/module/category/forms/add.svelte";
     import {category} from "$lib/module/category/store.js"
-    // let category = [
-    //   { name: "sample", type:"vehicle" },
-    //   { name: "sample1", type:"Pet"},
-    //   { name: "sample2", type:"Radio"},
-    // ];
-
 
     let data = JSON.parse(JSON.stringify($category));
     let addItems;
 
     let filters = $category.map((details)=> {return details.type})
     let filterValue;
+
+    //filtering of data
     $:{
       if(filterValue)
         data = $category.filter(data => data.type== filterValue)
     }
+    
+    //adding items in store
     $:{
       if(addItems)
       {
-
         category.add(addItems)
         data     = JSON.parse(JSON.stringify($category));
         filters  = $category.map((details)=> {return details.type})
