@@ -2,7 +2,17 @@
   import Ul from "$lib/component/list/ul.svelte";
   import Li from "$lib/component/list/li.svelte";
   import Button from "$lib/component/button/button.svelte";
-  export let items = [];
+  export let items = [],delIndex,action;
+
+  const decrement = (item) =>{
+    action = "minus";
+    delIndex = item.index
+  }
+
+  const increment = (item) =>{
+    action = "add";
+    delIndex = item.index
+  }
 </script>
 
 <Ul>
@@ -16,7 +26,7 @@
           <Button
             props={{
               attribute: { class: "btn bg-transparent text-danger fs-4 p-1" },
-              action: () => (item.qty -= 1),
+              action: () => (decrement(item)),
             }}
           >
             {"-"}
@@ -27,7 +37,7 @@
           <Button
             props={{
               attribute: { class: "btn bg-transparent text-success fs-4 p-1" },
-              action: () => (item.qty += 1),
+              action: () => (increment(item)),
             }}>{"+"}</Button
           >
         </span>
